@@ -49,4 +49,12 @@ public class FoodItemController {
         FoodItem updatedFoodItem = foodItemService.updateFoodItem(foodItem);
         return new ResponseEntity<>(updatedFoodItem,HttpStatus.OK);
     }
+
+    //build delete fooditem by id REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteFoodItem(@PathVariable("id") long foodItemId)
+    {
+        foodItemService.deleteFoodItem(foodItemId);
+        return new ResponseEntity<>("FoodItem deleted succsessfully!", HttpStatus.OK);
+    }
 }

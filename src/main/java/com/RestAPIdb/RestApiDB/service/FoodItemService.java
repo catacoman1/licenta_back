@@ -12,4 +12,6 @@ public interface FoodItemService {
     List<FoodItem> getAllFoodItems();
 
     FoodItem updateFoodItem(FoodItem foodItem);
+
+    void deleteFoodItem(Long foodItemId);
 }

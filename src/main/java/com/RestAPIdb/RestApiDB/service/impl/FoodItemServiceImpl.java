@@ -42,4 +42,9 @@ public class FoodItemServiceImpl implements FoodItemService {
         return updatedFoodItem;
 
     }
+
+    @Override
+    public void deleteFoodItem(Long foodItemId) {
+        foodItemRepository.deleteById(foodItemId);
+    }
 }
