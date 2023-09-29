@@ -1,17 +1,18 @@
 package com.RestAPIdb.RestApiDB.service;
 
+import com.RestAPIdb.RestApiDB.dto.FoodItemDto;
 import com.RestAPIdb.RestApiDB.entity.FoodItem;
 
 import java.util.List;
 
 public interface FoodItemService {
-    FoodItem createFoodItem(FoodItem foodItem);
+    FoodItemDto createFoodItem(FoodItemDto foodItem);
 
-    FoodItem getFoodItemById(Long fooditemId);
+    FoodItemDto getFoodItemById(Long fooditemId);
 
-    List<FoodItem> getAllFoodItems();
+    List<FoodItemDto> getAllFoodItems();
 
-    FoodItem updateFoodItem(FoodItem foodItem);
+    FoodItemDto updateFoodItem(FoodItemDto foodItem);
 
     void deleteFoodItem(Long foodItemId);
 }

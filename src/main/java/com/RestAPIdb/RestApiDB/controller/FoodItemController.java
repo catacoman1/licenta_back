@@ -1,5 +1,6 @@
 package com.RestAPIdb.RestApiDB.controller;
 
+import com.RestAPIdb.RestApiDB.dto.FoodItemDto;
 import com.RestAPIdb.RestApiDB.entity.FoodItem;
 import com.RestAPIdb.RestApiDB.service.FoodItemService;
 import lombok.AllArgsConstructor;
@@ -18,35 +19,35 @@ public class FoodItemController {
     //build create fooditem Rest API
 
     @PostMapping
-    public ResponseEntity<FoodItem> createFoodItem(@RequestBody FoodItem foodItem)
+    public ResponseEntity<FoodItemDto> createFoodItem(@RequestBody FoodItemDto foodItem)
     {
-        FoodItem savedfoodItem = foodItemService.createFoodItem(foodItem);
+        FoodItemDto savedfoodItem = foodItemService.createFoodItem(foodItem);
         return new ResponseEntity<>(savedfoodItem, HttpStatus.CREATED);
     }
 
     //build get fooditem by id REST API
     @GetMapping("{id}")
-    public ResponseEntity<FoodItem> getFoodItemById(@PathVariable("id") Long fooditemId)
+    public ResponseEntity<FoodItemDto> getFoodItemById(@PathVariable("id") Long fooditemId)
     {
-        FoodItem foodItem=foodItemService.getFoodItemById(fooditemId);
+        FoodItemDto foodItem=foodItemService.getFoodItemById(fooditemId);
         return new ResponseEntity<>(foodItem,HttpStatus.OK);
     }
 
     //build get all fooditems REST API
     @GetMapping("/all")
-    public ResponseEntity<List<FoodItem>> getAllFoodItems(FoodItem foodItem)
+    public ResponseEntity<List<FoodItemDto>> getAllFoodItems(FoodItem foodItem)
     {
-        List<FoodItem> foodItems= foodItemService.getAllFoodItems();
+        List<FoodItemDto> foodItems= foodItemService.getAllFoodItems();
         return new ResponseEntity<>(foodItems,HttpStatus.OK);
     }
 
     //build update fooditem REST API
     @PutMapping("/{id}")
-    public ResponseEntity<FoodItem> updateFoodItem(@PathVariable("id") Long foodItemId,
-                                                   @RequestBody FoodItem foodItem)
+    public ResponseEntity<FoodItemDto> updateFoodItem(@PathVariable("id") Long foodItemId,
+                                                   @RequestBody FoodItemDto foodItem)
     {
         foodItem.setId(foodItemId);
-        FoodItem updatedFoodItem = foodItemService.updateFoodItem(foodItem);
+        FoodItemDto updatedFoodItem = foodItemService.updateFoodItem(foodItem);
         return new ResponseEntity<>(updatedFoodItem,HttpStatus.OK);
     }
 

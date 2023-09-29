@@ -1,6 +1,8 @@
 package com.RestAPIdb.RestApiDB.service.impl;
 
+import com.RestAPIdb.RestApiDB.dto.FoodItemDto;
 import com.RestAPIdb.RestApiDB.entity.FoodItem;
+import com.RestAPIdb.RestApiDB.mapper.FoodItemMapper;
 import com.RestAPIdb.RestApiDB.repository.FoodItemRepository;
 import com.RestAPIdb.RestApiDB.service.FoodItemService;
 import lombok.AllArgsConstructor;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -18,28 +21,37 @@ public class FoodItemServiceImpl implements FoodItemService {
 
 
     @Override
-    public FoodItem createFoodItem(FoodItem foodItem) {
-        return foodItemRepository.save(foodItem);
-    }
+    public FoodItemDto createFoodItem(FoodItemDto foodItemDto) {
+        //convert fooditemdto into fooditem jpa entity
+        FoodItem foodItem = FoodItemMapper.mapToFoodItem(foodItemDto);
+        FoodItem savedFoodItem = foodItemRepository.save(foodItem);
 
+        //convert fooditem jpa entity to fooditemdto
+        FoodItemDto savedFoodItemDto = FoodItemMapper.mapToFoodItemDto(savedFoodItem);
+
+        return savedFoodItemDto;
+    }
     @Override
-    public FoodItem getFoodItemById(Long fooditemId) {
+    public FoodItemDto getFoodItemById(Long fooditemId) {
         Optional<FoodItem>optionalFoodItem = foodItemRepository.findById(fooditemId);
-        return optionalFoodItem.get();
+        FoodItem foodItem = optionalFoodItem.get();
+        return FoodItemMapper.mapToFoodItemDto(foodItem);
     }
 
     @Override
-    public List<FoodItem> getAllFoodItems() {
-        return foodItemRepository.findAll();
+    public List<FoodItemDto> getAllFoodItems() {
+        List<FoodItem> foodItems = foodItemRepository.findAll();
+        return foodItems.stream().map(FoodItemMapper::mapToFoodItemDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public FoodItem updateFoodItem(FoodItem foodItem) {
+    public FoodItemDto updateFoodItem(FoodItemDto foodItem) {
         FoodItem existingFoodItem = foodItemRepository.findById(foodItem.getId()).get();
         existingFoodItem.setCalories(foodItem.getCalories());
         existingFoodItem.setName(foodItem.getName());
         FoodItem updatedFoodItem = foodItemRepository.save(existingFoodItem);
-        return updatedFoodItem;
+        return FoodItemMapper.mapToFoodItemDto(updatedFoodItem);
 
     }
 
