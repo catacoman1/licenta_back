@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/fooditems")
@@ -30,4 +32,21 @@ public class FoodItemController {
         return new ResponseEntity<>(foodItem,HttpStatus.OK);
     }
 
+    //build get all fooditems REST API
+    @GetMapping("/all")
+    public ResponseEntity<List<FoodItem>> getAllFoodItems(FoodItem foodItem)
+    {
+        List<FoodItem> foodItems= foodItemService.getAllFoodItems();
+        return new ResponseEntity<>(foodItems,HttpStatus.OK);
+    }
+
+    //build update fooditem REST API
+    @PutMapping("/{id}")
+    public ResponseEntity<FoodItem> updateFoodItem(@PathVariable("id") Long foodItemId,
+                                                   @RequestBody FoodItem foodItem)
+    {
+        foodItem.setId(foodItemId);
+        FoodItem updatedFoodItem = foodItemService.updateFoodItem(foodItem);
+        return new ResponseEntity<>(updatedFoodItem,HttpStatus.OK);
+    }
 }
