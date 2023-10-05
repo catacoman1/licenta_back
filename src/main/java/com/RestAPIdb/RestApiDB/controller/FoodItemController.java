@@ -56,6 +56,6 @@ public class FoodItemController {
     public ResponseEntity<String> deleteFoodItem(@PathVariable("id") long foodItemId)
     {
         foodItemService.deleteFoodItem(foodItemId);
-        return new ResponseEntity<>("FoodItem deleted succsessfully!", HttpStatus.OK);
+        return new ResponseEntity<>("FoodItem deleted successfully!", HttpStatus.OK);
     }
 }

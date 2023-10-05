@@ -2,6 +2,7 @@ package com.RestAPIdb.RestApiDB.service.impl;
 
 import com.RestAPIdb.RestApiDB.dto.FoodItemDto;
 import com.RestAPIdb.RestApiDB.entity.FoodItem;
+import com.RestAPIdb.RestApiDB.exception.foodException.foodItemNotFoundException;
 import com.RestAPIdb.RestApiDB.mapper.FoodItemMapper;
 import com.RestAPIdb.RestApiDB.repository.FoodItemRepository;
 import com.RestAPIdb.RestApiDB.service.FoodItemService;
@@ -33,8 +34,10 @@ public class FoodItemServiceImpl implements FoodItemService {
     }
     @Override
     public FoodItemDto getFoodItemById(Long fooditemId) {
-        Optional<FoodItem>optionalFoodItem = foodItemRepository.findById(fooditemId);
-        FoodItem foodItem = optionalFoodItem.get();
+        FoodItem foodItem = foodItemRepository.findById(fooditemId).orElseThrow(
+
+                () -> new foodItemNotFoundException("foodItem", "id", fooditemId)
+        );
         return FoodItemMapper.mapToFoodItemDto(foodItem);
     }
 
