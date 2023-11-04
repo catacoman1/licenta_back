@@ -1,7 +1,6 @@
 package com.RestAPIdb.RestApiDB.service;
 
 import com.RestAPIdb.RestApiDB.dto.FoodItemDto;
-import com.RestAPIdb.RestApiDB.entity.FoodItem;
 
 import java.util.List;
 

@@ -12,7 +12,9 @@ public class FoodItemMapper {
         FoodItemDto foodItemDto = new FoodItemDto(
                 foodItem.getId(),
                 foodItem.getName(),
-                foodItem.getCalories()
+                foodItem.getCalories(),
+                foodItem.getMenu(),
+                foodItem.getNutrient()
         );
         return foodItemDto;
     }
@@ -24,7 +26,9 @@ public class FoodItemMapper {
         FoodItem foodItem = new FoodItem(
                 foodItemDto.getId(),
                 foodItemDto.getName(),
-                foodItemDto.getCalories()
+                foodItemDto.getCalories(),
+                foodItemDto.getMenu(),
+                foodItemDto.getNutrient()
         );
         return foodItem;
     }

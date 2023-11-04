@@ -1,5 +1,6 @@
 package com.RestAPIdb.RestApiDB.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,4 +22,12 @@ public class FoodItem {
     private String name;
     @Column(nullable = false)
     private Long calories;
+    @ManyToOne
+    @JoinColumn(name = "menu_id")
+    @JsonBackReference
+    private Menu menu;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name= "nuttrient_id", referencedColumnName = "id")
+    private Nutrient nutrient;
 }

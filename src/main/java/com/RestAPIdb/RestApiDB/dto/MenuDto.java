@@ -1,20 +1,22 @@
 package com.RestAPIdb.RestApiDB.dto;
 
-import com.RestAPIdb.RestApiDB.entity.Menu;
-import com.RestAPIdb.RestApiDB.entity.Nutrient;
+
+import com.RestAPIdb.RestApiDB.entity.FoodItem;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodItemDto {
+
+public class MenuDto {
     private long id;
     private String name;
-    private long calories;
-    private Menu menu;
-    private Nutrient nutrient;
+    private List<FoodItem> foodItemList;
+
 }
