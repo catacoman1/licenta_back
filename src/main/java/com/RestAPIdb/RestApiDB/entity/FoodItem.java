@@ -1,11 +1,15 @@
 package com.RestAPIdb.RestApiDB.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,21 +17,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name="fooditems")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
 public class FoodItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
     private Long calories;
-    @ManyToOne
-    @JoinColumn(name = "menu_id")
+    @ManyToMany(mappedBy = "foodItemList", fetch = FetchType.LAZY)
     @JsonBackReference
-    private Menu menu;
+    private List<Menu> menuList;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name= "nuttrient_id", referencedColumnName = "id")
+    @JoinColumn(name= "nutrient_id", referencedColumnName = "id")
     private Nutrient nutrient;
 }

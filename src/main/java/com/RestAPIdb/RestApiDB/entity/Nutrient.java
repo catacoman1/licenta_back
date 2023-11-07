@@ -1,5 +1,6 @@
 package com.RestAPIdb.RestApiDB.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Nutrient {
     private Long fats;
     private Long fibers;
     private Long vitamins;
+    @JsonBackReference
     @OneToOne(mappedBy = "nutrient")
     private FoodItem foodItem;
 

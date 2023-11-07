@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,6 +17,6 @@ public class FoodItemDto {
     private long id;
     private String name;
     private long calories;
-    private Menu menu;
+    private List<Menu> menuList;
     private Nutrient nutrient;
 }
