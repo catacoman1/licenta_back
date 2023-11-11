@@ -4,6 +4,7 @@ import com.RestAPIdb.RestApiDB.dto.UserDto;
 import com.RestAPIdb.RestApiDB.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -14,6 +15,7 @@ public interface UserService {
     List<UserDto> getAllUsers();
 
     UserDto updateUser(UserDto user);
+
 
     void deleteUser(Long userId);
 }

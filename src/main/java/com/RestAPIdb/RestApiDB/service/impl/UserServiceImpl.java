@@ -51,8 +51,12 @@ public class UserServiceImpl implements UserService
     public UserDto updateUser(UserDto userDto)
     {
         User existingUser = userRepository.findById(userDto.getId()).get();
-        existingUser.setName(userDto.getName());
+
+        existingUser.setFirst_name(userDto.getFirst_name());
+        existingUser.setLast_name(userDto.getLast_name());
         existingUser.setEmail(userDto.getEmail());
+        existingUser.setPassword(userDto.getPassword());
+        existingUser.setRole(userDto.getRole());
         existingUser.setDiabet(userDto.getDiabet());
         existingUser.setAge(userDto.getAge());
         User updatedUser = userRepository.save(existingUser);
