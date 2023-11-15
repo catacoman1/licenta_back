@@ -18,12 +18,26 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
+
+    private String first_name;
+
+    private String last_name;
+
     private String email;
-    @Column(nullable = false)
+
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     private String diabet;
-    @Column(nullable = false)
+
     private Long age;
+
+
+
+
+
+
+
 }

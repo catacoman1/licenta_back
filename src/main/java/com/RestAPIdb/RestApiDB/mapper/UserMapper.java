@@ -9,8 +9,11 @@ public class UserMapper {
     {
         UserDto userDto = new UserDto(
                 user.getId(),
-                user.getName(),
+                user.getFirst_name(),
+                user.getLast_name(),
                 user.getEmail(),
+                user.getPassword(),
+                user.getRole(),
                 user.getDiabet(),
                 user.getAge()
         );
@@ -22,8 +25,11 @@ public class UserMapper {
     {
         User user = new User(
                 userDto.getId(),
-                userDto.getName(),
+                userDto.getFirst_name(),
+                userDto.getLast_name(),
                 userDto.getEmail(),
+                userDto.getPassword(),
+                userDto.getRole(),
                 userDto.getDiabet(),
                 userDto.getAge()
         );
