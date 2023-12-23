@@ -30,6 +30,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
+
     }
 
     @Bean
@@ -58,5 +59,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
         return new BCryptPasswordEncoder();
     }
 
+
+    
 
 }

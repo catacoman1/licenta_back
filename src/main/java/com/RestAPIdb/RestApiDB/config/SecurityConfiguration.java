@@ -19,7 +19,13 @@ public class SecurityConfiguration {
 
     private static final String[] WHITE_LIST_URL = {
             "/api/auth/**",
-            "/api/fooditems/**"
+            "/api/fooditems/**",
+            "api/menus/**",
+            "api/users/**",
+            "api/nutrients/**"
+
+
+
     };
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;

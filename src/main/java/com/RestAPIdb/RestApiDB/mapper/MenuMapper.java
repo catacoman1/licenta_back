@@ -9,7 +9,8 @@ public class MenuMapper {
         MenuDto menuDto = new MenuDto(
                 menu.getId(),
                 menu.getName(),
-                menu.getFoodItemList()
+                menu.getFoodItemList(),
+                menu.getImg()
 
         );
         return menuDto;
@@ -19,7 +20,8 @@ public class MenuMapper {
         Menu menu = new Menu(
                 menuDto.getId(),
                 menuDto.getName(),
-                menuDto.getFoodItemList()
+                menuDto.getFoodItemList(),
+                menuDto.getImg()
         );
         return menu;
     }

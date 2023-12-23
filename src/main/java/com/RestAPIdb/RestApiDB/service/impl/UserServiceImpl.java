@@ -67,4 +67,13 @@ public class UserServiceImpl implements UserService
     {
         userRepository.deleteById(userId);
     }
+
+    @Override
+    public String getUserEmailById(Long userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            return user.getEmail();
+        }
+        return null;
+    }
 }

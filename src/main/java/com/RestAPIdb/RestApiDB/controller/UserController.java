@@ -52,6 +52,16 @@ public class UserController {
         userService.deleteUser(userId);
         return new ResponseEntity<>("User deleted successfully!", HttpStatus.OK);
     }
+    @GetMapping("{id}/email")
+    public ResponseEntity<String> getUserEmail(@PathVariable("id") Long userId) {
+        String userEmail = userService.getUserEmailById(userId);
+        if (userEmail != null) {
+            return new ResponseEntity<>(userEmail, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }
 

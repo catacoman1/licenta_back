@@ -18,5 +18,6 @@ public class MenuDto {
     private long id;
     private String name;
     private List<FoodItem> foodItemList;
+    private String img;
 
 }

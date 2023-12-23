@@ -37,4 +37,6 @@ public class Menu {
 
 
     private List<FoodItem> foodItemList;
+
+    private String img;
 }
