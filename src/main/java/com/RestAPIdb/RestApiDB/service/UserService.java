@@ -20,4 +20,6 @@ public interface UserService {
     void deleteUser(Long userId);
 
     String getUserEmailById(Long userId);
+
+    UserDto getUserByEmail(String userEmail);
 }

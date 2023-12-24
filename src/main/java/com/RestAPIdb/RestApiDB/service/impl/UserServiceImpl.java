@@ -3,6 +3,7 @@ package com.RestAPIdb.RestApiDB.service.impl;
 import com.RestAPIdb.RestApiDB.dto.UserDto;
 import com.RestAPIdb.RestApiDB.entity.User;
 import com.RestAPIdb.RestApiDB.exception.userException.userNotFoundException;
+import com.RestAPIdb.RestApiDB.exception.userException.userNotFoundExceptionByEmail;
 import com.RestAPIdb.RestApiDB.mapper.UserMapper;
 import com.RestAPIdb.RestApiDB.repository.UserRepository;
 import com.RestAPIdb.RestApiDB.service.UserService;
@@ -76,4 +77,15 @@ public class UserServiceImpl implements UserService
         }
         return null;
     }
+
+    @Override
+    public UserDto getUserByEmail(String userEmail)
+    {
+        User user = userRepository.findByEmail(userEmail).orElseThrow(
+                () -> new userNotFoundExceptionByEmail(userEmail)
+        );
+        return UserMapper.mapToUserDto(user);
+
+    }
+
 }

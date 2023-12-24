@@ -61,6 +61,12 @@ public class UserController {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserDto> getUserByEmail(@PathVariable("email")String userEmail)
+    {
+        UserDto user = userService.getUserByEmail(userEmail);
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
 
 
 }
