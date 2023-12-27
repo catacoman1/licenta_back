@@ -18,11 +18,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration {
 
     private static final String[] WHITE_LIST_URL = {
-            "/api/auth/**",
-            "/api/fooditems/**",
-            "/api/menus/**",
-            "/api/users/**",
-            "/api/nutrients/**"
+            "/api/auth/**"
+//            "/api/fooditems/**",
+//            "/api/menus/**",
+//            "/api/users/**",
+//            "/api/nutrients/**"
 
 
 
@@ -33,6 +33,8 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .csrf()
                 .disable()
                 .authorizeHttpRequests(

@@ -30,4 +30,6 @@ public class UserDto {
 
     private Long age;
 
+    private Float glicemie;
+
 }

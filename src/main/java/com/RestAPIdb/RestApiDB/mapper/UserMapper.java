@@ -15,7 +15,8 @@ public class UserMapper {
                 user.getPassword(),
                 user.getRole(),
                 user.getDiabet(),
-                user.getAge()
+                user.getAge(),
+                user.getGlicemie()
         );
         return userDto;
 
@@ -31,7 +32,8 @@ public class UserMapper {
                 userDto.getPassword(),
                 userDto.getRole(),
                 userDto.getDiabet(),
-                userDto.getAge()
+                userDto.getAge(),
+                userDto.getGlicemie()
         );
         return  user;
     }
