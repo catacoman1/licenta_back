@@ -14,7 +14,9 @@ public class NutrientMapper {
                 nutrient.getFats(),
                 nutrient.getFibers(),
                 nutrient.getVitamins(),
+                nutrient.getIG(),
                 nutrient.getFoodItem()
+
 
         );
         return nutrientDto;
@@ -31,6 +33,7 @@ public class NutrientMapper {
                 nutrientDto.getFats(),
                 nutrientDto.getVitamins(),
                 nutrientDto.getFibers(),
+                nutrientDto.getIG(),
                 nutrientDto.getFoodItem()
         );
         return nutrient;

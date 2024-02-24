@@ -2,6 +2,7 @@ package com.RestAPIdb.RestApiDB.service.impl;
 
 import com.RestAPIdb.RestApiDB.dto.FoodItemDto;
 import com.RestAPIdb.RestApiDB.entity.FoodItem;
+import com.RestAPIdb.RestApiDB.exception.foodException.foodItemByCategoryNotFoundException;
 import com.RestAPIdb.RestApiDB.exception.foodException.foodItemNotFoundException;
 import com.RestAPIdb.RestApiDB.mapper.FoodItemMapper;
 import com.RestAPIdb.RestApiDB.repository.FoodItemRepository;
@@ -60,5 +61,17 @@ public class FoodItemServiceImpl implements FoodItemService {
     @Override
     public void deleteFoodItem(Long foodItemId) {
         foodItemRepository.deleteById(foodItemId);
+    }
+
+    @Override
+    public List<FoodItemDto> getFoodItemByCategory(String category)
+    {
+        List<FoodItem> foodItems = foodItemRepository.findByCategory(category);
+        if(foodItems.isEmpty())
+        {
+            throw new foodItemByCategoryNotFoundException("FoodItem", "category", category);
+        }
+        return foodItems.stream().map(FoodItemMapper::mapToFoodItemDto)
+                .collect(Collectors.toList());
     }
 }

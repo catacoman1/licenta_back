@@ -62,4 +62,10 @@ public class NutrientServiceImplementation implements NutrientService {
         nutrientRepository.deleteById(nutrientId);
     }
 
+    @Override
+    public float calculateSG(Float IG, Long carbs, Float servingSize)
+    {
+        return (IG * carbs * servingSize)/100;
+    }
+
 }

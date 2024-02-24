@@ -32,4 +32,5 @@ public class FoodItem {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "nutrient_id", referencedColumnName = "id")
     private Nutrient nutrient;
+    private String category;
 }

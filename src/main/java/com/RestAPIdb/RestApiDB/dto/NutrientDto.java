@@ -17,5 +17,7 @@ public class NutrientDto {
     private Long fats;
     private Long fibers;
     private Long vitamins;
+    private Float IG;
     private FoodItem foodItem;
+
 }

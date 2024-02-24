@@ -15,4 +15,7 @@ public interface NutrientService {
 
     void deleteNutrient(Long nutrientId);
 
+    float calculateSG(Float IG, Long carbs, Float servingSize);
+
+
 }

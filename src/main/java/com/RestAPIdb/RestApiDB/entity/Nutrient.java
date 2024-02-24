@@ -22,6 +22,7 @@ public class Nutrient {
     private Long fats;
     private Long fibers;
     private Long vitamins;
+    private Float IG;
     @JsonBackReference
     @OneToOne(mappedBy = "nutrient")
     private FoodItem foodItem;

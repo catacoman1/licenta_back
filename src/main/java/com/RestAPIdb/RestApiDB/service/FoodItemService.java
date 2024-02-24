@@ -14,4 +14,6 @@ public interface FoodItemService {
     FoodItemDto updateFoodItem(FoodItemDto foodItem);
 
     void deleteFoodItem(Long foodItemId);
+
+    List<FoodItemDto> getFoodItemByCategory(String category);
 }

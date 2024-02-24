@@ -59,4 +59,13 @@ public class FoodItemController {
         foodItemService.deleteFoodItem(foodItemId);
         return new ResponseEntity<>("FoodItem deleted successfully!", HttpStatus.OK);
     }
+
+
+    @GetMapping("{category}")
+    public ResponseEntity<List<FoodItemDto>> getFoodItemByCategory(@PathVariable("category") String category)
+    {
+        List<FoodItemDto> foodItems = foodItemService.getFoodItemByCategory(category);
+        return new ResponseEntity<>(foodItems,HttpStatus.OK);
+    }
+
 }
