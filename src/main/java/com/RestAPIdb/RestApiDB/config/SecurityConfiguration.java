@@ -18,11 +18,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration {
 
     private static final String[] WHITE_LIST_URL = {
-            "/api/auth/**"
+            "/api/auth/**",
+            "/v3/api-docs/**",
+            "/v3/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/favicon.ico",
+            "/webjars/**",
+            "/swagger-resources/**"
 //            "/api/fooditems/**",
-//            "/api/menus/**",
-//            "/api/users/**",
-//            "/api/nutrients/**"
+//           "/api/menus/**" ,
+//           "/api/users/**",
+//           "/api/nutrients/**"
+
 
 
 

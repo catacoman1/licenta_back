@@ -17,7 +17,7 @@ public class FoodItemDto {
     private long id;
     private String name;
     private long calories;
-    private List<Menu> menuList;
+    private List<Long> menuIds;
     private Nutrient nutrient;
     private String category;
 }

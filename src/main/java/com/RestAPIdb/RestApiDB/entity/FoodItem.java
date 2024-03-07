@@ -25,9 +25,8 @@ public class FoodItem {
     private Long id;
     private String name;
     private Long calories;
-    @ManyToMany(mappedBy = "foodItemList", fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<Menu> menuList;
+    @OneToMany(mappedBy = "foodItem", fetch = FetchType.LAZY)
+    private List<MenuFoodItem> menuFoodItems;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "nutrient_id", referencedColumnName = "id")

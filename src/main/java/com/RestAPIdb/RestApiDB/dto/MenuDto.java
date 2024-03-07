@@ -17,7 +17,7 @@ import java.util.List;
 public class MenuDto {
     private long id;
     private String name;
-    private List<FoodItem> foodItemList;
+    private List<FoodItemWithQuantityDto> foodItemWithQuantities;
     private String img;
 
 }

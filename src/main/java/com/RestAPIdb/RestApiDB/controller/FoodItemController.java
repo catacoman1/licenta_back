@@ -61,7 +61,7 @@ public class FoodItemController {
     }
 
 
-    @GetMapping("{category}")
+    @GetMapping("/category/{category}")
     public ResponseEntity<List<FoodItemDto>> getFoodItemByCategory(@PathVariable("category") String category)
     {
         List<FoodItemDto> foodItems = foodItemService.getFoodItemByCategory(category);

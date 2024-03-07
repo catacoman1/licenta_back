@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -25,18 +26,8 @@ public class Menu {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "MENU_FOODITEMS_TABLE",
-            joinColumns = {
-            @JoinColumn(name = "menu_id", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-            @JoinColumn(name = "fooditem_id", referencedColumnName = "id")
-            }
-    )
-
-
-    private List<FoodItem> foodItemList;
+    @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<MenuFoodItem> menuFoodItems = new ArrayList<>();
 
     private String img;
 }

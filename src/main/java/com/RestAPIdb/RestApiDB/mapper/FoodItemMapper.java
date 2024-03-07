@@ -2,6 +2,10 @@ package com.RestAPIdb.RestApiDB.mapper;
 
 import com.RestAPIdb.RestApiDB.dto.FoodItemDto;
 import com.RestAPIdb.RestApiDB.entity.FoodItem;
+import com.RestAPIdb.RestApiDB.entity.MenuFoodItem;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class FoodItemMapper {
 
@@ -9,11 +13,17 @@ public class FoodItemMapper {
     //Convert fooditem jpa entity into fooditemdto
     public static FoodItemDto mapToFoodItemDto(FoodItem foodItem)
     {
+        List<Long> menuIds = foodItem.getMenuFoodItems().stream()
+                .map(menuFoodItem -> menuFoodItem.getMenu().getId())
+                .collect(Collectors.toList());
+
+
+
         FoodItemDto foodItemDto = new FoodItemDto(
                 foodItem.getId(),
                 foodItem.getName(),
                 foodItem.getCalories(),
-                foodItem.getMenuList(),
+                menuIds,
                 foodItem.getNutrient(),
                 foodItem.getCategory()
         );
@@ -24,14 +34,12 @@ public class FoodItemMapper {
     //convert fooditemdto into fooditem jpa entity
     public static FoodItem mapToFoodItem(FoodItemDto foodItemDto)
     {
-        FoodItem foodItem = new FoodItem(
-                foodItemDto.getId(),
-                foodItemDto.getName(),
-                foodItemDto.getCalories(),
-                foodItemDto.getMenuList(),
-                foodItemDto.getNutrient(),
-                foodItemDto.getCategory()
-        );
+        FoodItem foodItem = new FoodItem();
+        foodItem.setId(foodItemDto.getId());
+        foodItem.setName(foodItemDto.getName());
+        foodItem.setCalories(foodItemDto.getCalories());
+        foodItem.setCategory(foodItem.getCategory());
+
         return foodItem;
     }
 
