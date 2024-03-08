@@ -9,16 +9,8 @@ import java.util.List;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class menuNotFoundException extends RuntimeException{
-    private String menu;
-    private String menuName;
-    private Long menuId;
 
-    private Menu menuObj;
-
-    public menuNotFoundException(String menu, String menuName, Long menuId){
-        super(String.format("%s not found with %s : %s", menu, menuName, menuId));
-        this.menu = menu;
-        this.menuName = menuName;
-        this.menuId = menuId;
+    public menuNotFoundException(Long id){
+        super("Menu nof found with id: "+id);
     }
 }

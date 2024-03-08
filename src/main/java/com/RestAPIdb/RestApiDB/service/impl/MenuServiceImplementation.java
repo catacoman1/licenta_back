@@ -5,6 +5,7 @@ import com.RestAPIdb.RestApiDB.dto.MenuDto;
 import com.RestAPIdb.RestApiDB.entity.FoodItem;
 import com.RestAPIdb.RestApiDB.entity.Menu;
 import com.RestAPIdb.RestApiDB.entity.MenuFoodItem;
+import com.RestAPIdb.RestApiDB.entity.Nutrient;
 import com.RestAPIdb.RestApiDB.exception.menuException.menuNotFoundException;
 import com.RestAPIdb.RestApiDB.mapper.MenuMapper;
 import com.RestAPIdb.RestApiDB.repository.FoodItemRepository;
@@ -56,7 +57,7 @@ public class MenuServiceImplementation implements MenuService {
     @Override
     public MenuDto getMenuById(Long menuId) {
         Menu menu = menuRepository.findById(menuId).orElseThrow(
-                () -> new menuNotFoundException("menu", "id", menuId)
+                () -> new menuNotFoundException(menuId)
         );
         return MenuMapper.mapToMenuDto(menu);
     }
@@ -75,7 +76,7 @@ public class MenuServiceImplementation implements MenuService {
     public MenuDto updateMenu(MenuDto menuDto)
     {
         Menu existingMenu = menuRepository.findById(menuDto.getId())
-                .orElseThrow(() -> new menuNotFoundException("Menu", "id", menuDto.getId()));
+                .orElseThrow(() -> new menuNotFoundException(menuDto.getId()));
 
         existingMenu.setName(menuDto.getName());
 
@@ -92,5 +93,55 @@ public class MenuServiceImplementation implements MenuService {
     {
         menuRepository.deleteById(menuId);
     }
+
+    @Override
+    public void calculateSG(Long menuId)
+    {
+        Menu menu = menuRepository.findById(menuId)
+                .orElseThrow(()-> new menuNotFoundException(menuId));
+
+        Float totalSG = 0f;
+        int itemCount = 0;
+
+
+            for(MenuFoodItem menuFoodItem: menu.getMenuFoodItems())
+            {
+                FoodItem foodItem = menuFoodItem.getFoodItem();
+                Nutrient nutrient = foodItem.getNutrient();
+
+                if(nutrient !=null)
+                {
+                    Float IG = nutrient.getIG();
+                    Long carbs = nutrient.getCarbs();
+                    Float servingSize = menuFoodItem.getQuantity();
+
+                    Float SG = (IG * carbs * servingSize) / 100;
+
+                    totalSG += SG;
+                    itemCount++;
+                }
+            }
+            if(itemCount>0)
+            {
+                menu.setSG(totalSG);
+                menuRepository.save(menu);
+
+            }
+
+        }
+
+
+    @Override
+    public void calculateSGForAllMenus(){
+        List<Menu> Menus = menuRepository.findAll();
+        for(Menu menu: Menus)
+        {
+            calculateSG(menu.getId());
+        }
+    }
+
+
+
+
 
 }

@@ -20,7 +20,8 @@ public class MenuMapper {
                 menu.getId(),
                 menu.getName(),
                 foodItemsWithQuantities,
-                menu.getImg()
+                menu.getImg(),
+                menu.getSG()
         );
     }
     public static Menu mapToMenu(MenuDto menuDto)
@@ -29,6 +30,7 @@ public class MenuMapper {
         menu.setId(menuDto.getId());
         menu.setName(menuDto.getName());
         menu.setImg(menuDto.getImg());
+        menu.setSG(menuDto.getSG());
         return menu;
     }
 }

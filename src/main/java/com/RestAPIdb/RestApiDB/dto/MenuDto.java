@@ -19,5 +19,6 @@ public class MenuDto {
     private String name;
     private List<FoodItemWithQuantityDto> foodItemWithQuantities;
     private String img;
+    private Float SG;
 
 }

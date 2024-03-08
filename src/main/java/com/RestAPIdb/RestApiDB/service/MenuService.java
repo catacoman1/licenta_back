@@ -1,6 +1,7 @@
 package com.RestAPIdb.RestApiDB.service;
 
 import com.RestAPIdb.RestApiDB.dto.MenuDto;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -15,4 +16,9 @@ public interface MenuService {
     MenuDto updateMenu(MenuDto menu);
 
     void deleteMenu(Long MenuId);
+
+    void calculateSG(Long menuId);
+
+    @Transactional
+    void calculateSGForAllMenus();
 }

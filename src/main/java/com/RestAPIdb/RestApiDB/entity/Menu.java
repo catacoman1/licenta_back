@@ -28,6 +28,6 @@ public class Menu {
     private String name;
     @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<MenuFoodItem> menuFoodItems = new ArrayList<>();
-
     private String img;
+    private Float SG;
 }

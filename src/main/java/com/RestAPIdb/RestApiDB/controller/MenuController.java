@@ -21,6 +21,7 @@ public class MenuController {
     public ResponseEntity<MenuDto> createMenu(@RequestBody MenuDto menuDto)
     {
         MenuDto savedMenu = menuService.createMenu(menuDto);
+        menuService.calculateSG(savedMenu.getId());
         return new ResponseEntity<>(savedMenu, HttpStatus.CREATED);
     }
     @GetMapping("/{id}")
@@ -40,6 +41,7 @@ public class MenuController {
     {
         menuDto.setId(menuId);
         MenuDto updatedMenu = menuService.updateMenu(menuDto);
+        menuService.calculateSG(updatedMenu.getId());
         return new ResponseEntity<>(menuDto,HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
@@ -48,4 +50,13 @@ public class MenuController {
         menuService.deleteMenu(menuId);
         return new ResponseEntity<>("Menu deleted successfully",HttpStatus.OK);
     }
+
+    @PostMapping("/calculateSG")
+    public ResponseEntity<String> calculateSGForAllMenus()
+    {
+        menuService.calculateSGForAllMenus();
+        return new ResponseEntity<>("SG calculated for all menus", HttpStatus.OK);
+    }
+
+
 }
