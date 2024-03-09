@@ -1,6 +1,10 @@
 package com.RestAPIdb.RestApiDB.config;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +23,27 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
+
+@OpenAPIDefinition(
+        info = @Info(
+                title = "Spring Boot REST API Documentation",
+                description = "Spring Boot REST API Documentation",
+                version = "v1.0",
+                contact = @Contact(
+                        name = "Catalin",
+                        email = "catacoman11@gmail.com"
+                )
+
+
+        )
+
+)
+
 @SecurityScheme(
         name = "Bearer Authentication",
         type = SecuritySchemeType.HTTP,
         bearerFormat = "JWT",
+        in= SecuritySchemeIn.HEADER,
         scheme = "bearer"
 )
 public class SwaggerConfig {

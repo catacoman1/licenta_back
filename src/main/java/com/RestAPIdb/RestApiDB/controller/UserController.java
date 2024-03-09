@@ -2,6 +2,7 @@ package com.RestAPIdb.RestApiDB.controller;
 
 import com.RestAPIdb.RestApiDB.dto.UserDto;
 import com.RestAPIdb.RestApiDB.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200/**")
 @AllArgsConstructor
 @RequestMapping("api/users")
+@SecurityRequirement(name="Bearer Authentication")
 public class UserController {
     private UserService userService;
 

@@ -2,6 +2,7 @@ package com.RestAPIdb.RestApiDB.controller;
 
 import com.RestAPIdb.RestApiDB.dto.MenuDto;
 import com.RestAPIdb.RestApiDB.service.MenuService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 @RequestMapping("api/menus")
+@SecurityRequirement(name="Bearer Authentication")
 public class MenuController {
     private MenuService menuService;
 

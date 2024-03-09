@@ -3,6 +3,7 @@ package com.RestAPIdb.RestApiDB.controller;
 import com.RestAPIdb.RestApiDB.dto.NutrientDto;
 import com.RestAPIdb.RestApiDB.entity.Nutrient;
 import com.RestAPIdb.RestApiDB.service.NutrientService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 @RequestMapping("api/nutrients")
+@SecurityRequirement(name="Bearer Authentication")
 public class NutrientController {
 
     private NutrientService nutrientService;

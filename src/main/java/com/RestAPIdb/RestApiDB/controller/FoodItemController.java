@@ -3,6 +3,7 @@ package com.RestAPIdb.RestApiDB.controller;
 import com.RestAPIdb.RestApiDB.dto.FoodItemDto;
 import com.RestAPIdb.RestApiDB.entity.FoodItem;
 import com.RestAPIdb.RestApiDB.service.FoodItemService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 @RequestMapping("api/fooditems")
+@SecurityRequirement(name="Bearer Authentication")
 public class FoodItemController {
     private FoodItemService foodItemService;
 
