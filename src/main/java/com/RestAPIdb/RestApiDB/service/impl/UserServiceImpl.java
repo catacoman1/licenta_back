@@ -1,10 +1,13 @@
 package com.RestAPIdb.RestApiDB.service.impl;
 
+import com.RestAPIdb.RestApiDB.dto.GlicemieDto;
 import com.RestAPIdb.RestApiDB.dto.UserDto;
+import com.RestAPIdb.RestApiDB.entity.Glicemie;
 import com.RestAPIdb.RestApiDB.entity.User;
 import com.RestAPIdb.RestApiDB.exception.userException.userNotFoundException;
 import com.RestAPIdb.RestApiDB.exception.userException.userNotFoundExceptionByEmail;
 import com.RestAPIdb.RestApiDB.mapper.UserMapper;
+import com.RestAPIdb.RestApiDB.repository.GlicemieRepository;
 import com.RestAPIdb.RestApiDB.repository.UserRepository;
 import com.RestAPIdb.RestApiDB.service.UserService;
 import lombok.AllArgsConstructor;
@@ -19,6 +22,7 @@ public class UserServiceImpl implements UserService
 {
 
     private UserRepository userRepository;
+    private GlicemieRepository glicemieRepository;
 
     @Override
     public UserDto createUser(UserDto userDto)
@@ -34,8 +38,8 @@ public class UserServiceImpl implements UserService
     public UserDto getUserById(Long userId)
     {
         User user = userRepository.findById(userId).orElseThrow(
-                () -> new userNotFoundException("user", "id", userId)
-        );
+                () -> new userNotFoundException(userId));
+
         return UserMapper.mapToUserDto(user);
 
     }
@@ -86,6 +90,35 @@ public class UserServiceImpl implements UserService
         );
         return UserMapper.mapToUserDto(user);
 
+    }
+    @Override
+    public List<GlicemieDto> getGlicemieByUserId(Long userId)
+    {
+        List<Glicemie> glicemieList = glicemieRepository.findByUserId(userId);
+        return glicemieList.stream()
+                .map(glicemie -> new GlicemieDto(glicemie.getId(), glicemie.getValue(), glicemie.getDate()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public GlicemieDto createGlicemieForUser(Long userId, GlicemieDto glicemieDto)
+    {
+        User user = userRepository.findById(userId)
+                .orElseThrow(()-> new userNotFoundException(userId));
+
+        Glicemie glicemie = new Glicemie();
+        glicemie.setValue(glicemieDto.getValue());
+        glicemie.setDate(glicemieDto.getDate());
+        glicemie.setUser(user);
+
+        glicemie = glicemieRepository.save(glicemie);
+
+        GlicemieDto savedGlicemieDto = new GlicemieDto();
+        savedGlicemieDto.setId(glicemie.getId());
+        savedGlicemieDto.setValue(glicemie.getValue());
+        savedGlicemieDto.setDate(glicemie.getDate());
+
+        return savedGlicemieDto;
     }
 
 }

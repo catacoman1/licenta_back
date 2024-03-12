@@ -1,17 +1,13 @@
 package com.RestAPIdb.RestApiDB.exception.userException;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class userNotFoundException extends RuntimeException{
 
-    private String user;
-    private String userName;
-
-    private long userValue;
-
-    public userNotFoundException(String user, String userName, long userValue)
-    {
-        super(String.format("%s not found with %s : %s",user,userName));
-        this.user = user;
-        this.userName = userName;
-        this.userValue = userValue;
+    public userNotFoundException(Long id){
+        super("Menu not found with id: "+id);
     }
 }
+

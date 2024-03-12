@@ -1,5 +1,6 @@
 package com.RestAPIdb.RestApiDB.service;
 
+import com.RestAPIdb.RestApiDB.dto.GlicemieDto;
 import com.RestAPIdb.RestApiDB.dto.UserDto;
 import com.RestAPIdb.RestApiDB.entity.User;
 
@@ -22,4 +23,8 @@ public interface UserService {
     String getUserEmailById(Long userId);
 
     UserDto getUserByEmail(String userEmail);
+
+    List<GlicemieDto> getGlicemieByUserId(Long userId);
+
+    GlicemieDto createGlicemieForUser(Long userId, GlicemieDto glicemieDto);
 }

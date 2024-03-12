@@ -11,6 +11,6 @@ import java.util.List;
 public class menuNotFoundException extends RuntimeException{
 
     public menuNotFoundException(Long id){
-        super("Menu nof found with id: "+id);
+        super("Menu not found with id: "+id);
     }
 }

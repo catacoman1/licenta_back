@@ -1,5 +1,6 @@
 package com.RestAPIdb.RestApiDB.dto;
 
+import com.RestAPIdb.RestApiDB.entity.Glicemie;
 import com.RestAPIdb.RestApiDB.entity.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -7,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,6 +33,6 @@ public class UserDto {
 
     private Long age;
 
-    private Float glicemie;
+    private List<Glicemie> glicemieList;
 
 }

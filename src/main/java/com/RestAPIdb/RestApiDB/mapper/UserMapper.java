@@ -16,7 +16,7 @@ public class UserMapper {
                 user.getRole(),
                 user.getDiabet(),
                 user.getAge(),
-                user.getGlicemie()
+                user.getGlicemieList()
         );
         return userDto;
 
@@ -33,7 +33,7 @@ public class UserMapper {
                 userDto.getRole(),
                 userDto.getDiabet(),
                 userDto.getAge(),
-                userDto.getGlicemie()
+                userDto.getGlicemieList()
         );
         return  user;
     }

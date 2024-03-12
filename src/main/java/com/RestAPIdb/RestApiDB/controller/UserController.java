@@ -1,6 +1,9 @@
 package com.RestAPIdb.RestApiDB.controller;
 
+import com.RestAPIdb.RestApiDB.dto.GlicemieDto;
 import com.RestAPIdb.RestApiDB.dto.UserDto;
+import com.RestAPIdb.RestApiDB.entity.Glicemie;
+import com.RestAPIdb.RestApiDB.repository.GlicemieRepository;
 import com.RestAPIdb.RestApiDB.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
@@ -70,6 +73,18 @@ public class UserController {
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
+    @GetMapping("/{id}/glicemie")
+    public ResponseEntity<List<GlicemieDto>> getGlicemieByUserId(@PathVariable("id") Long userId)
+    {
+        List<GlicemieDto> glicemieDtoList = userService.getGlicemieByUserId(userId);
+        return new ResponseEntity<>(glicemieDtoList, HttpStatus.OK);
+    }
+
+    @PostMapping("/{userId}/glicemie")
+    public ResponseEntity<GlicemieDto> createGlicemie(@PathVariable("userId") Long userId, @RequestBody GlicemieDto glicemieDto) {
+        GlicemieDto savedGlicemie = userService.createGlicemieForUser(userId, glicemieDto);
+        return new ResponseEntity<>(savedGlicemie, HttpStatus.CREATED);
+    }
 
 }
 

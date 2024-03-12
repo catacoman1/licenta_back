@@ -39,7 +39,8 @@ public class User implements UserDetails {
 
     private Long age;
 
-    private Float glicemie;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Glicemie> glicemieList;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -75,4 +76,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }
