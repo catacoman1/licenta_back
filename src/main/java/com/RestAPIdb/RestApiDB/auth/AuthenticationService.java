@@ -29,7 +29,7 @@ public class AuthenticationService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setAge(request.getAge());
         user.setDiabet(request.getDiabet());
-        user.setRole(Role.USER);
+        user.setRole(request.getRole());
 
 
             userRepository.save(user);
