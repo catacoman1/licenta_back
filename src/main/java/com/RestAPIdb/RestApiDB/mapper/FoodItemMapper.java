@@ -1,8 +1,10 @@
 package com.RestAPIdb.RestApiDB.mapper;
 
 import com.RestAPIdb.RestApiDB.dto.FoodItemDto;
+import com.RestAPIdb.RestApiDB.dto.NutrientDto;
 import com.RestAPIdb.RestApiDB.entity.FoodItem;
 import com.RestAPIdb.RestApiDB.entity.MenuFoodItem;
+import com.RestAPIdb.RestApiDB.entity.Nutrient;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,8 +40,12 @@ public class FoodItemMapper {
         foodItem.setId(foodItemDto.getId());
         foodItem.setName(foodItemDto.getName());
         foodItem.setCalories(foodItemDto.getCalories());
-        foodItem.setCategory(foodItem.getCategory());
-
+        foodItem.setCategory(foodItemDto.getCategory());
+        if (foodItemDto.getNutrient() != null) {
+            NutrientDto nutrientDto = NutrientMapper.mapToNutrientDto(foodItemDto.getNutrient());
+            Nutrient nutrient = NutrientMapper.mapToNutrient(nutrientDto);
+            foodItem.setNutrient(nutrient);
+        }
         return foodItem;
     }
 

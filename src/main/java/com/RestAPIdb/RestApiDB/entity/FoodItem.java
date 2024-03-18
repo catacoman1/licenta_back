@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,7 +27,7 @@ public class FoodItem {
     private String name;
     private Long calories;
     @OneToMany(mappedBy = "foodItem", fetch = FetchType.LAZY)
-    private List<MenuFoodItem> menuFoodItems;
+    private List<MenuFoodItem> menuFoodItems = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "nutrient_id", referencedColumnName = "id")
