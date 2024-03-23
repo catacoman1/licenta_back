@@ -1,5 +1,6 @@
 package com.RestAPIdb.RestApiDB.controller;
 
+import com.RestAPIdb.RestApiDB.dto.FoodItemSwapRecommendationDTO;
 import com.RestAPIdb.RestApiDB.dto.MenuDto;
 import com.RestAPIdb.RestApiDB.service.MenuService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -59,6 +60,17 @@ public class MenuController {
         menuService.calculateSGForAllMenus();
         return new ResponseEntity<>("SG calculated for all menus", HttpStatus.OK);
     }
+
+//    @GetMapping("/{menuId}/swap/{userId}")
+//    public ResponseEntity<List<FoodItemSwapRecommendationDTO>> getSwapRecommendations(@PathVariable("userId")Long userId, @PathVariable("menuId")Long menuId)
+//    {
+//        List<FoodItemSwapRecommendationDTO> recommendations = menuService.generateSwapRecommendations(userId,menuId);
+//        return ResponseEntity.ok(recommendations);
+//    }
+
+
+
+
 
 
 }

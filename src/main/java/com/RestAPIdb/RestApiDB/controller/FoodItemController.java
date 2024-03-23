@@ -1,10 +1,14 @@
 package com.RestAPIdb.RestApiDB.controller;
 
 import com.RestAPIdb.RestApiDB.dto.FoodItemDto;
+import com.RestAPIdb.RestApiDB.dto.FoodItemSwapRecommendationDTO;
 import com.RestAPIdb.RestApiDB.entity.FoodItem;
+
+import com.RestAPIdb.RestApiDB.repository.FoodItemRepository;
 import com.RestAPIdb.RestApiDB.service.FoodItemService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +22,8 @@ import java.util.List;
 @SecurityRequirement(name="Bearer Authentication")
 public class FoodItemController {
     private FoodItemService foodItemService;
+
+
 
     //build create fooditem Rest API
 
@@ -69,5 +75,14 @@ public class FoodItemController {
         List<FoodItemDto> foodItems = foodItemService.getFoodItemByCategory(category);
         return new ResponseEntity<>(foodItems,HttpStatus.OK);
     }
+
+
+    @GetMapping("/lower-ig")
+    public ResponseEntity<List<FoodItemSwapRecommendationDTO>> getLowerIgAlternatives(@RequestParam String category, @RequestParam Float ig)
+    {
+        List<FoodItemSwapRecommendationDTO> alternatives = foodItemService.findLowerIgAlternativesByCategory(category,ig);
+        return ResponseEntity.ok(alternatives);
+    }
+
 
 }

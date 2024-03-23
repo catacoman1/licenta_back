@@ -1,15 +1,18 @@
 package com.RestAPIdb.RestApiDB.service.impl;
 
 import com.RestAPIdb.RestApiDB.dto.FoodItemDto;
+import com.RestAPIdb.RestApiDB.dto.FoodItemSwapRecommendationDTO;
 import com.RestAPIdb.RestApiDB.entity.FoodItem;
 import com.RestAPIdb.RestApiDB.exception.foodException.foodItemByCategoryNotFoundException;
 import com.RestAPIdb.RestApiDB.exception.foodException.foodItemNotFoundException;
 import com.RestAPIdb.RestApiDB.mapper.FoodItemMapper;
 import com.RestAPIdb.RestApiDB.repository.FoodItemRepository;
 import com.RestAPIdb.RestApiDB.service.FoodItemService;
+import jakarta.persistence.Tuple;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,5 +76,20 @@ public class FoodItemServiceImpl implements FoodItemService {
         }
         return foodItems.stream().map(FoodItemMapper::mapToFoodItemDto)
                 .collect(Collectors.toList());
+    }
+    @Override
+    public List<FoodItemSwapRecommendationDTO> findLowerIgAlternativesByCategory(String category, Float ig) {
+        List<Tuple> tuples = foodItemRepository.findLowerIgAlternativesByCategory(category, ig);
+
+        List<FoodItemSwapRecommendationDTO> dtos = tuples.stream().map(tuple -> {
+            FoodItemSwapRecommendationDTO dto = new FoodItemSwapRecommendationDTO();
+            dto.setName(tuple.get("name", String.class));
+            dto.setCategory(tuple.get("category", String.class));
+            dto.setIg(tuple.get("ig", Float.class));
+            return dto;
+        }).collect(Collectors.toList());
+
+        Collections.shuffle(dtos);
+        return dtos.size() > 3 ? dtos.subList(0, 3) : dtos;
     }
 }

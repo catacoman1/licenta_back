@@ -1,5 +1,7 @@
 package com.RestAPIdb.RestApiDB.config;
 
+import com.RestAPIdb.RestApiDB.entity.User;
+import com.RestAPIdb.RestApiDB.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -77,11 +79,15 @@ public class JwtService {
 
     public String buildToken(Map<String,Object> extraClaims, UserDetails userDetails)
     {
+        Long userId= ((User)userDetails).getId();
+
         String roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
+
         extraClaims.put("roles",roles);
+        extraClaims.put("id", userId);
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
